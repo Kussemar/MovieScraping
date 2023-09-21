@@ -15,10 +15,10 @@ import lombok.ToString;
 @Table(name = "movie")
 @ToString
 public class Movie {
+
     @Id
     @Column(name = "imdb_id")
     private int id;
-
 
     @Column(name = "title")
     private String title;
@@ -39,10 +39,10 @@ public class Movie {
     private String MPAArating;
 
     @Column(name = "duration")
-    private int duration;
+    private String duration;
 
     @Builder
-    public Movie(String title, String thumbnailImageURL, double rating, int numberOfRatings, int releaseYear, String MPAArating, int duration) {
+    public Movie(String title, String thumbnailImageURL, double rating, int numberOfRatings, int releaseYear, String MPAArating, String duration) {
         this.title = title;
         this.thumbnailImageURL = thumbnailImageURL;
         this.rating = rating;
