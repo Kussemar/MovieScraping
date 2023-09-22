@@ -62,7 +62,7 @@ public class Scraper {
             int releaseYear = Integer.parseInt(releaseYearString);
 
             //Target er det vi ønsker at replace -> replacement: hvad vi ønsker at replace MED
-            numberOfRatingsString = numberOfRatingsString.replace("&nbsp;(", "").replace(")", "");
+            numberOfRatingsString = numberOfRatingsString.replace("(", "").replace(")", "");
 
             // Hvis vi nu prøver at parse '2M' så vil den klage, så vi laver en metode til dette.
             // M laves om til mio og K om til tusind
@@ -78,7 +78,7 @@ public class Scraper {
             String imdbId = imdbIdLink.replace("/title/", "");
             imdbId = imdbId.substring(0, imdbId.indexOf("/"));
 
-            IMDbMovieList.add(new Movie(title, imageURL, rating, numberOfRatings, releaseYear, mpaaRating, duration));
+            IMDbMovieList.add(new Movie(title, imageURL, rating, numberOfRatings, releaseYear, mpaaRating, duration, imdbId));
 
         }
 

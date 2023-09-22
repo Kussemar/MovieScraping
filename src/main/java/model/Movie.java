@@ -1,9 +1,6 @@
 package model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +14,8 @@ import lombok.ToString;
 public class Movie {
 
     @Id
-    @Column(name = "imdb_id")
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "title")
@@ -40,9 +38,11 @@ public class Movie {
 
     @Column(name = "duration")
     private String duration;
+    @Column(name = "imdb_id")
+    private String imdbId;
 
     @Builder
-    public Movie(String title, String thumbnailImageURL, double rating, int numberOfRatings, int releaseYear, String MPAArating, String duration) {
+    public Movie(String title, String thumbnailImageURL, double rating, int numberOfRatings, int releaseYear, String MPAArating, String duration, String imdbId) {
         this.title = title;
         this.thumbnailImageURL = thumbnailImageURL;
         this.rating = rating;
@@ -50,5 +50,6 @@ public class Movie {
         this.releaseYear = releaseYear;
         this.MPAArating = MPAArating;
         this.duration = duration;
+        this.imdbId = imdbId;
     }
 }
