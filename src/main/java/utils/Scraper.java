@@ -3,6 +3,8 @@ package utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.Getter;
+import model.Book;
+import model.Game;
 import model.Movie;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,6 +12,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,14 +25,22 @@ import java.util.logging.Logger;
 import static javax.management.Query.attr;
 public class Scraper {
 
-    static String url = "https://www.imdb.com/chart/top/?ref_=nv_mv_250";
+    public static <T> List<T> fetchData(Class<T> klazz) throws IOException, InterruptedException {
+        if (klazz.getClass().equals(Movie.class)) {
+            return (List<T>)fetchMovieData();
+        }
+        if (klazz.getClass().equals(Book.class)) {
+            // fetchBookData
+        }
+        if (klazz.getClass().equals(Game.class)) {
+            // fetchGameData
+        }
+        return null;
+    }
 
-    static Gson gson = new GsonBuilder()
-            .setPrettyPrinting()
-            .create();
+    public static List<Movie> fetchMovieData() throws IOException, InterruptedException {
+        String url = "https://www.imdb.com/chart/top/?ref_=nv_mv_250";
 
-
-    public static List<Movie> fetchData() throws IOException, InterruptedException {
         List<Movie> IMDbMovieList = new ArrayList<>();
         Document doc = Jsoup.connect(url)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
@@ -87,7 +101,7 @@ public class Scraper {
 
 
     // M laves om til mio og K om til tusind
-    // Og vi vil gerne have ,8 med,
+    // Og vi vil gerne have ",8" med,
     public static int parseNumberOfRatings(String pas) {
         char KMs = pas.charAt(pas.length() - 1);
         switch (KMs) {

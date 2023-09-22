@@ -17,10 +17,11 @@ public class Main {
         MovieDAO movieDAO = MovieDAO.getInstance(emf);
 
         System.out.println("Scraping imdb top 250...");
-        List<Movie> movies = Scraper.fetchData();
+        List<Movie> movies = Scraper.fetchData(Movie.class);
 
         for (Movie m : movies) {
             movieDAO.saveMovie(m);
         }
+
     }
 }
