@@ -19,9 +19,7 @@ public class Main {
         System.out.println("Scraping imdb top 250...");
         List<Movie> movies = Scraper.fetchData();
 
-        for (int i = 0; i < movies.size(); i++) {
-            Movie m = movies.get(i);
-            System.out.println(i + ": " + m.getImdbId());
+        for (Movie m : movies) {
             movieDAO.saveMovie(m);
         }
     }
